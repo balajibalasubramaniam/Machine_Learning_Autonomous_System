@@ -8,7 +8,7 @@ Python - https://www.python.org/
 
 CoppeliaSim - https://www.coppeliarobotics.com/
 
-pip packet manager install following dependencies:
+For Ubuntu, use pip packet manager to install the following dependencies:
 
 ```
 pip install pandas
