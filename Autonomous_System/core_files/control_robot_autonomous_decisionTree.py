@@ -56,7 +56,7 @@ error_code, right_proximity_sensor = sim.simxGetObjectHandle(clientID, '/Pioneer
 # The below variable will be used to determine the location of the robot
 position=0
 explored_location = {"X : 100 - Y : 100","X : -100 - Y : -100"}
-destination_position = "X : -1.3 - Y : -1.3" # destination to stop the robot
+destination_position = "X : 2.7 - Y : 2.0" # destination to stop the robot
 
 while (1):
 	# Read the proximity sensor data
