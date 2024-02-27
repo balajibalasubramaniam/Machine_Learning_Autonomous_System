@@ -101,7 +101,7 @@ def press(user_key_press):
 	error_code = sim.simxSetJointTargetVelocity(clientID, right_motor_handle, rSpeed, sim.simx_opmode_oneshot_wait)
 
 # Write data into CSV file
-with open('data_sensor_test.csv', 'a') as f:
+with open('data_sensor.csv', 'a') as f:
 	    
 	while (1):
 		listen_keyboard(on_press=press)
