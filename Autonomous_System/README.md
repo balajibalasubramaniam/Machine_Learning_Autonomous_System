@@ -12,8 +12,8 @@ For Ubuntu, use pip packet manager to install the following dependencies:
 
 ```
 pip install pandas
-pip install matplotlib
 pip install scikit-learn
+pip install matplotlib
 pip install sshkeyboard
 ```
 
