@@ -5,12 +5,16 @@ Download and install Python and CoppeliaSim.
 
 # Download website
 Python - https://www.python.org/
+
 CoppeliaSim - https://www.coppeliarobotics.com/
 
 # Steps
-Open the coppeliaSim, and then open the “maze.ttt” scene file 
+Open the coppeliaSim, and then open the “maze.ttt” scene file
+
 Press play in coppeliaSim
+
 Open terminal
+
 Execute the “control_robot_autonomous_decisionTree.py” file 
 
 # Video
