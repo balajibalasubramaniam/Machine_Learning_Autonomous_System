@@ -40,7 +40,7 @@ if (clientID != -1):
 else:
     sys.exit('Failed To connect.')
 
-time.sleep(1)
+delay(1)
 
 # Get object handles
 error_code, pioneer_handle = sim.simxGetObjectHandle(clientID, '/PioneerP3DX', sim.simx_opmode_oneshot_wait)
