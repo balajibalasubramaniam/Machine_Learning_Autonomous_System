@@ -35,6 +35,10 @@ fig.savefig("decistion_tree_visualization.png")
 sim.simxFinish(-1)
 clientID = sim.simxStart('127.0.0.1', 19999, True, True, 5000, 5)
 
+# Initialize motor speed
+left_motor_speed = 0
+right_motor_speed = 0
+
 if (clientID != -1):
     print('Connected Successfully.')
 else:
@@ -51,7 +55,8 @@ error_code, right_proximity_sensor = sim.simxGetObjectHandle(clientID, '/Pioneer
 
 # The below variable will be used to determine the location of the robot
 position=0
-explored_location = {"X : 0 - Y : 0","X : 100 - Y : 100"}
+explored_location = {"X : 100 - Y : 100","X : -100 - Y : -100"}
+destination_position = "X : -1.3 - Y : -1.3" # destination to stop the robot
 
 while (1):
 	# Read the proximity sensor data
@@ -64,6 +69,13 @@ while (1):
 	if current_position not in explored_location:
 		explored_location.add(current_position)
 		print("current_position: ",current_position)
+		
+		# Check if the robot reached destination
+		if current_position in destination_position:
+			error_code = sim.simxSetJointTargetVelocity(clientID, left_motor_handle, 0, sim.simx_opmode_oneshot_wait)
+			error_code = sim.simxSetJointTargetVelocity(clientID, right_motor_handle, 0, sim.simx_opmode_oneshot_wait)
+			print("Stopping the robot. Reached destination position-> ",destination_position)
+			sys.exit(0)
 	
 	# If the wall is too far from the proximity sensor's detection range then assume there is no obstacle
 	if(data_left_sensor[1]):
@@ -80,16 +92,17 @@ while (1):
 	predict_Direction_DecisionTree = dtree.predict([[round(left_obstacle_distance,2),round(right_obstacle_distance,2)]])
 	
 	if( predict_Direction_DecisionTree == 0): # Forward
-		error_code = sim.simxSetJointTargetVelocity(clientID, left_motor_handle, 0.5, sim.simx_opmode_oneshot_wait)
-		error_code = sim.simxSetJointTargetVelocity(clientID, right_motor_handle, 0.5, sim.simx_opmode_oneshot_wait)
+		left_motor_speed = 0.5
+		right_motor_speed = 0.5
 		
 	if( predict_Direction_DecisionTree == 1): # Left
-		error_code = sim.simxSetJointTargetVelocity(clientID, left_motor_handle, 0.25, sim.simx_opmode_oneshot_wait)
-		error_code = sim.simxSetJointTargetVelocity(clientID, right_motor_handle, 0.5, sim.simx_opmode_oneshot_wait)
+		left_motor_speed = 0.25
+		right_motor_speed = 0.5
 		
 	if( predict_Direction_DecisionTree == 2): # Right
-		error_code = sim.simxSetJointTargetVelocity(clientID, left_motor_handle, 0.5, sim.simx_opmode_oneshot_wait)
-		error_code = sim.simxSetJointTargetVelocity(clientID, right_motor_handle, 0.25, sim.simx_opmode_oneshot_wait)
-
-
+		left_motor_speed = 0.5
+		right_motor_speed = 0.25
+        
+	error_code = sim.simxSetJointTargetVelocity(clientID, left_motor_handle, left_motor_speed, sim.simx_opmode_streaming)
+	error_code = sim.simxSetJointTargetVelocity(clientID, right_motor_handle, right_motor_speed, sim.simx_opmode_streaming)
 
