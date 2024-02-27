@@ -8,6 +8,13 @@ Python - https://www.python.org/
 
 CoppeliaSim - https://www.coppeliarobotics.com/
 
+'''
+pip install pandas
+pip install matplotlib
+pip install scikit-learn
+pip install sshkeyboard
+'''
+
 # Steps
 Open the coppeliaSim, and then open the “maze.ttt” scene file
 
