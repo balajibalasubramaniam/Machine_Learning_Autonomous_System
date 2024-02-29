@@ -27,4 +27,4 @@ Open terminal
 Execute the “control_robot_autonomous_decisionTree.py” file 
 
 # Video
-For video instructions - follow the below URL. YouTube -
+For video instructions - follow the below URL. YouTube - https://www.youtube.com/watch?v=K97BWL2mYgY
